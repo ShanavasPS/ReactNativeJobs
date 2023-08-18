@@ -12,12 +12,23 @@ import useFetch from '../../../hook/useFetch';
 const Popularjobs = () => {
 
   const router = useRouter();
+  const [selectedJob, setSelectedJob] = useState();
   const { data, isLoading, error } = useFetch(
     'search', {
       query: 'React developer',
       num_pages: 1,
     }
   );
+  
+  const handleCardPress = (item) => {
+    try {
+      router.push(`/job-details/${item.job_id}`);
+      setSelectedJob(item.job_id);
+    } catch {
+      console.log("caught an execption");
+    }
+    
+  };
 
   console.log("Inside popular jobs");
   console.log(data);
@@ -45,6 +56,8 @@ const Popularjobs = () => {
               renderItem={({item}) => (
                 <PopularJobCard
                   item={item}
+                  selectedJob={selectedJob}
+                  handleCardPress={handleCardPress}
                 />
               )}
               keyExtractor={(item) => item.job_id}

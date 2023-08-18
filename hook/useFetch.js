@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import axios from "axios";
 
 const useFetch = (endpoint, query) => {
+    console.log("Inside useFetch");
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -10,14 +11,14 @@ const useFetch = (endpoint, query) => {
         method: 'GET',
         url: `https://jsearch.p.rapidapi.com/${endpoint}`,
         headers: {
-            'X-RapidAPI-Key': 'f6cf1191f1mshe5cf137643ae59fp1ff23fjsn63391004fca6',
+            'X-RapidAPI-Key': '71a318e1b0msha00a9fed79e486ep1c9ccbjsnf0a201fe8c96',
             'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
         },
         params: { ...query }
     };
 
     const fetchData = async () => {
-        console.log("trying to fetch data");
+        console.log("trying to fetch data from ", endpoint);
         setIsLoading(true);
 
         try {
